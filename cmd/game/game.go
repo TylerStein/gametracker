@@ -60,7 +60,7 @@ func (d *Handler) handleRequest(request events.APIGatewayProxyRequest) (events.A
 		TableName: aws.String(d.GamesTable),
 	}
 
-	response, err := d.Database.PutItem(&input)
+	_, err = d.Database.PutItem(&input)
 	if err != nil {
 		fmt.Println("Could not call d.Database.PutItem on input")
 		fmt.Println(body)
@@ -71,10 +71,10 @@ func (d *Handler) handleRequest(request events.APIGatewayProxyRequest) (events.A
 		}, nil
 	}
 
-	responseBytes, err := json.Marshal(response)
+	responseBytes, err := json.Marshal(body)
 	if err != nil {
-		fmt.Println("Could not marshal response to json")
-		fmt.Println(response)
+		fmt.Println("Could not marshal body to json")
+		fmt.Println(body)
 		fmt.Println(err)
 		return events.APIGatewayProxyResponse{
 			Body:       fmt.Sprintf("Internal server error"),

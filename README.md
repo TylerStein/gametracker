@@ -1,4 +1,4 @@
-# game-rating
+# game-tracker
 
 This is a sample template for game-tracker - Below is a brief explanation of what we have generated for you:
 

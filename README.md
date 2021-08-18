@@ -10,9 +10,9 @@ This project uses the Amazon Web Servirces Serverless Application Model (SAM)
 ├── README.md                   <-- This file
 ├── cmd                         <-- Individual lambda instance code
 │   └── game                    <-- Lambda code
-│         ├── game.go           <-- game lambda handler
-│         ├── game_test.go      <-- game lambda tests
-│         └── game_test_util.go <-- game lambda test utilities
+│         ├── game.go           <-- game API lambda handler
+│         ├── game_test.go      <-- game API lambda tests
+│         └── game_test_util.go <-- game API lambda test utilities
 ├── internal                    <-- Shared go code
 │   └── data                    <-- Shared data structs
 │         ├── data.go           <-- Common shared data structs

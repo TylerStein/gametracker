@@ -35,16 +35,16 @@ func (d *Handler) handleRequest(request events.APIGatewayProxyRequest) (events.A
 		}, nil
 	}
 
-	bodyErr := body.Validate()
-	if bodyErr != nil {
+	err = body.Validate()
+	if err != nil {
 		return events.APIGatewayProxyResponse{
-			Body:       fmt.Sprintf("Malformed body: %v", bodyErr.Error()),
+			Body:       fmt.Sprintf("Malformed body: %v", err.Error()),
 			StatusCode: 400,
 		}, nil
 	}
 
 	body.Id = uuid.NewString()
-	item, err := dynamodbattribute.MarshalMap(body)
+	dbPutItem, err := dynamodbattribute.MarshalMap(body)
 	if err != nil {
 		fmt.Println("Could not call dynamodbattribute.MarshalMap on body")
 		fmt.Println(body)
@@ -56,7 +56,7 @@ func (d *Handler) handleRequest(request events.APIGatewayProxyRequest) (events.A
 	}
 
 	input := dynamodb.PutItemInput{
-		Item:      item,
+		Item:      dbPutItem,
 		TableName: aws.String(d.GamesTable),
 	}
 
